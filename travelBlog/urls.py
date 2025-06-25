@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('homepage_app.urls')),
     path('login/', include('login_app.urls')),
     path('blog/', include('blog_app.urls')),
+    # path('userAuthenticaton', views.userAuthenticaton, name = 'userAuthenticaton'),
 ]

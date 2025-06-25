@@ -9,19 +9,21 @@
     </head>
     <body>
     <div class = "center">
-        <h1> Welcome</h1>
-        <form method="post">
+        <h1> User Login</h1>
+        <form action="{% url 'userAuthenticaton' %}"method="POST">
 
         <div class="txt_field"> 
-            <input type="text" required>
+            {% csrf_token %}
+            <input type="text" name = "username" required>
             <span> </span>
-            <label> Username </label>
+            <label for = "username"> username </label>
         </div>
 
     <div class="txt_field">
-        <input type="password" required>
+        {% csrf_token %}
+        <input type="password" name = "pass" required>
         <span> </span>
-        <label> Password </label>
+        <label for = "pass"> password </label>
     </div>
 
     <div class="forgot"> Forgot Password </div>
