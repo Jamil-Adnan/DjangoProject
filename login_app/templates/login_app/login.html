@@ -10,24 +10,22 @@
     <body>
     <div class = "center">
         <h1> User Login</h1>
-        <form action="{% url 'userAuthenticaton' %}"method="POST">
+        <form action="{% url 'userAuthenticaton' %} "method="POST">
+        {% csrf_token %}
 
         <div class="txt_field"> 
-            {% csrf_token %}
-            <input type="text" name = "username" required>
+            
+            <input type="text" name ="username" required>
             <span> </span>
             <label for = "username"> username </label>
         </div>
 
-    <div class="txt_field">
-        {% csrf_token %}
-        <input type="password" name = "pass" required>
-        <span> </span>
-        <label for = "pass"> password </label>
-    </div>
+        <div class="txt_field">
+            <input type="password" name = "pass" required>
+            <span> </span>
+            <label for = "pass"> password </label>
+        </div>
 
-    <div class="forgot"> Forgot Password </div>
-        <input type="submit" value="Login">
-        <div class="users_signup">
-        Don't have an account? <a href="signUp">SignUp</a>
+    <div class="forgot"> </div> 
+        <input type="submit" value="Login">        
     </div>
