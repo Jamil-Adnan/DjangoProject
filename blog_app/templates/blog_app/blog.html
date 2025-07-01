@@ -1,68 +1,50 @@
-<!DOCTYPE html>
-
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to the blog</title>
-  <link rel="stylesheet" href="{% static 'blog_app/css/styles.css' %}" />
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/styles.css' %}">
 </head>
 <body>
-  <div class="form-box">
-    <h1>Share Your Experiences with Us!</h1>
+    <div class="container">
+        <h1>Submit a Blog Post</h1>
+        
+        <form method="POST" enctype="multipart/form-data" class="submission-form">
+            {% csrf_token %}
 
-    <form class="form" action="#" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="id_author">Author Name:</label>
+                <input type="text" name="author" id="id_author" maxlength="12" required>
+            </div>
 
-      <!-- Username -->
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-      </div>
+            <div class="form-group">
+                <label for="id_image">Upload a Picture:</label>
+                <input type="file" name="image" id="id_image" accept="image/*" required>
+            </div>
 
-      <!-- Upload Picture (customized) -->
-      <div class="form-group">
-        <label for="photo">Upload Picture:</label>
-        <div class="custom-file-upload">
-          <label for="photo" class="upload-btn">Upload</label>
-          <span id="file-name">Select file to upload</span>
-          <input type="file" id="photo" name="photo" accept="image/*" required />
+            <div class="form-group">
+                <label for="id_post">Short Description (max 200 characters):</label>
+                <textarea name="post" id="id_post" maxlength="200" rows="4" required></textarea>
+            </div>
+
+            <button type="submit">Post</button>
+        </form>
+
+        <h2>User Posts</h2>
+        <div class="posts">
+            {% for post in data %}
+                <div class="post">
+                    <img src="{{ post.image.url }}" alt="Post Image">
+                    <div class="post-details">
+                        <h3>{{ post.author }}</h3>
+                        <p>{{ post.post }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No posts yet.</p>
+            {% endfor %}
         </div>
-      </div>
-
-      <!-- Short Description -->
-      <div class="form-group">
-        <label for="description">Short Description:</label>
-        <textarea id="description" name="description" maxlength="200" rows="4" required></textarea>
-        <div class="char-count" id="charCount">0 / 200</div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit">Submit</button>
-
-    </form>
-  </div>
-
-  <script>
-    // Character counter
-    const textarea = document.getElementById("description");
-    const charCount = document.getElementById("charCount");
-
-    textarea.addEventListener("input", () => {
-      charCount.textContent = `${textarea.value.length} / 200`;
-    });
-
-    // Custom file input label
-    const fileInput = document.getElementById("photo");
-    const fileNameSpan = document.getElementById("file-name");
-
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files.length > 0) {
-        fileNameSpan.textContent = fileInput.files[0].name;
-      } else {
-        fileNameSpan.textContent = "Select files to upload";
-      }
-    });
-  </script>
+    </div>
 </body>
 </html>
