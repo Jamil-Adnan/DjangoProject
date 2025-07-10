@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('homepage_app.urls')),
     path('login/', include('login_app.urls')),
     path('blog/', include('blog_app.urls')),
+    path('signup/', include('signup_app.urls')),
+    
     ]
 
 if settings.DEBUG:

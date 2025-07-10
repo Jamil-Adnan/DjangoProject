@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'homepage_app',
     'login_app',
     'blog_app',
+    'signup_app',
 ]
 
 MIDDLEWARE = [

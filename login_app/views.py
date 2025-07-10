@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import User
+from signup_app.models import User_signup
 from django.contrib import messages
 
 def login(request):
@@ -10,14 +10,14 @@ def userAuthenticaton(request):
     if request.method == "POST":
         
         userUsername = request.POST.get("username")
-        userPassword = request.POST.get("pass")
+        userPassword = request.POST.get("password")
         
         try:
-            user = User.objects.get(username = userUsername, password = userPassword)
+            user = User_signup.objects.get(username = userUsername, password = userPassword)
             request.session ['userId'] = user.id
             return redirect ('blog')
         
-        except User.DoesNotExist:
+        except User_signup.DoesNotExist:
             error = "Invalid username or password"
             messages.error (request, error)
             return redirect ('login')
